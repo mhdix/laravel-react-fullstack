@@ -1,8 +1,9 @@
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axiosClient from "../axios-client.js";
 
 export default function UserForm() {
+    const navigate = useNavigate();
     const {id} = useParams();
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState();
@@ -19,14 +20,39 @@ export default function UserForm() {
             axiosClient.get(`/user/${id}`).then(({data}) => {
                 setLoading(false)
                 setUser(data)
-            }).catch(() => {
-                setLoading(false)
+            }).catch(err => {
+                console.log(err)
+                const response = err.response;
+                if (response && response.status === 422) {
+                    setError(response.data.errors);
+                }
             })
         }, [])
     }
 
-    const onSubmit = () => {
-
+    const onSubmit = (e) => {
+        e.preventDefault();
+        if (user.id){
+            axiosClient.put(`/user/${user.id}` , user).then(()=>{
+                navigate('/user')
+            }).catch(err => {
+                console.log(err)
+                const response = err.response;
+                if (response && response.status === 422) {
+                    setError(response.data.errors);
+                }
+            })
+        }else {
+            axiosClient.post(`/user` , user).then(()=>{
+                navigate('/user')
+            }).catch(err => {
+                console.log(err)
+                const response = err.response;
+                if (response && response.status === 422) {
+                    setError(response.data.errors);
+                }
+            })
+        }
     }
 
     return (
