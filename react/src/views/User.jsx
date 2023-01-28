@@ -15,6 +15,7 @@ export default function User() {
         setLoading(true)
 
         if (!window.confirm("Are you sure want to delete this user")) {
+            setLoading(false)
             return;
         }
         axiosClient.delete(`/user/${user.id}`).then(() => {
