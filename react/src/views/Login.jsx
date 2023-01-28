@@ -58,8 +58,8 @@ const Login = () => {
                     <h1 className='title'>
                         Login into your account
                     </h1>
-                    <input ref={emailRef} type="text" placeholder='Email'/>
-                    <input ref={passwordRef} type="text" placeholder='password'/>
+                    <input ref={emailRef} type="email" placeholder='Email'/>
+                    <input ref={passwordRef} type="password" placeholder='password'/>
                     <button className='btn btn-block'>Login</button>
                     <p className='message'>
                         Not Registered <Link to='/signup'>Create an account</Link>

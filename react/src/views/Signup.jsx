@@ -48,10 +48,10 @@ export default function Signup() {
                             ))}
                         </div>
                     }
-                    <input ref={nameRef} placeholder='Full Name'/>
-                    <input ref={emailRef} placeholder='Email'/>
-                    <input ref={passwordRef} placeholder='password'/>
-                    <input ref={passwordConfirmationRef} placeholder='password Confirmation'/>
+                    <input ref={nameRef} placeholder='Full Name' type='name'/>
+                    <input ref={emailRef} placeholder='Email' type='email'/>
+                    <input ref={passwordRef} placeholder='password' type='password'/>
+                    <input ref={passwordConfirmationRef} placeholder='password Confirmation' type='password'/>
                     <button className='btn btn-block'>Login</button>
                     <p className='message'>
                         Already registered? <Link to='/login'>Sign in</Link>
